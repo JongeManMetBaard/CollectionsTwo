@@ -3,6 +3,9 @@ import random
 negativeNumForRed = -2
 negativeNumForBlue = -2
 
+choiceCounterRed = 0
+choiceCounterBlue = 0
+
 redDice = ["1", "2", "3", "4", "5", "6"]
 blueDice = ["1", "2", "3", "4", "5", "6"]
 whiteDice = ["1", "1", "1", "2", "2", "3"]
@@ -22,9 +25,6 @@ for x in range(4):
     outcome_b = randomRed + randomBlue - randomWhite
     outcome_c = randomRed + randomBlue
     outcome_d = randomRed - randomWhite 
-
-
-
 
     print("----------------------------------------------------------------------------")
     print("     Dobbel Trobbel")
@@ -68,13 +68,18 @@ for x in range(4):
         choice = outcome_d
 
     if randomRed > randomBlue:
+        
         print(red)        
-        position = int(input("This is the list of the red row, choose a position\n"))
+        position = int(input("This is the list of the red row, choose a position fr\n"))
         red[position] = choice
+        if choice < choiceCounterRed:
+            print("error")
     elif randomBlue > randomRed:
         print(blue)
         position = int(input("This is the list of the blue row, choose a position\n"))
-        blue[position] = randomBlue
+        blue[position] = choice
+        if choice < choiceCounterBlue:
+            print("error")
     elif randomRed == randomBlue:
         if redBlue == "r":
             print(red)
@@ -84,15 +89,16 @@ for x in range(4):
             print(blue)
             position = int(input("This is the list of the blue row, choose a position\n"))
             blue[position] = randomBlue
+    choiceCounterRed = choice
+    choiceCounterBlue = choice
 
 
-    def checkingPosition(red,blue):
-        repeat = True
-        while repeat:
-            if red[position] != "":
-                print("Choose a different position")
-            elif blue[position] != "":
-                print("Choose a different position")
+    # def checkingPosition(red,blue):
+    #     repeat = True
+    #     while repeat:
+    #         repeat = False
+    #         if red[position] == "" or blue[position] == "":
+    #             print("Choose a different position")
+    #             repeat = True
 
-
-    checkingPosition(red,blue)
+    # checkingPosition(red,blue)
