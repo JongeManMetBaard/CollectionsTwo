@@ -7,12 +7,15 @@ redDice = ["1", "2", "3", "4", "5", "6"]
 blueDice = ["1", "2", "3", "4", "5", "6"]
 whiteDice = ["1", "1", "1", "2", "2", "3"]
 
-choice = ""
+choicePosition = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+red =  [{negativeNumForRed}, "", "", "", "", "", "", "", "", ""] 
+blue = ["", "", "", "", "", "", "", "", "", {negativeNumForBlue}]
 
 for x in range(4):
 
-    randomRed = random.randint(1,1)
-    randomBlue = random.randint(1,1)
+    randomRed = random.randint(1,6)
+    randomBlue = random.randint(1,6)
     randomWhite = random.randint(1,3)
 
     outcome_a = randomRed + randomBlue + randomWhite
@@ -20,13 +23,16 @@ for x in range(4):
     outcome_c = randomRed + randomBlue
     outcome_d = randomRed - randomWhite 
 
+
+
+
     print("----------------------------------------------------------------------------")
     print("     Dobbel Trobbel")
     print("----------------------------------------------------------------------------")
     print("position :    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10  |")
     print("----------------------------------------------------------------------------")
-    print(f"Scores Red:   | {negativeNumForRed}  |     |     |     |     |     |     |     |     |      |")
-    print(f"Scores Blue:  | {choice}    |     |     |     |     |     |     |     |     |  {negativeNumForBlue}  |")
+    print(red)
+    print(blue)
     print("----------------------------------------------------------------------------")
     print("Scores White: |     |     |     |     |     |")
     print("----------------------------------------------------------------------------")
@@ -40,7 +46,7 @@ for x in range(4):
     print(f"a: {outcome_a} = {randomRed} + {randomBlue} + {randomWhite}")
     print(f"b: {outcome_b} = {randomRed} + {randomBlue} - {randomWhite}")
     print(f"c: {outcome_c} = {randomRed} + {randomBlue}")
-    print(f"d: {outcome_d} = {randomRed} - {randomWhite}")
+    print(f"d: {outcome_d} = {randomRed} - {randomWhite}" )
     print("If chosen for c or d, the white value will be registered")
     
     if randomRed > randomBlue:
@@ -61,12 +67,32 @@ for x in range(4):
     elif choice == "d":
         choice = outcome_d
 
-    if randomRed > randomBlue:        
-        position = input("Choose a position in the red row from\n")
+    if randomRed > randomBlue:
+        print(red)        
+        position = int(input("This is the list of the red row, choose a position\n"))
+        red[position] = choice
     elif randomBlue > randomRed:
-        position = input("Choose a position in the blue row from\n")
+        print(blue)
+        position = int(input("This is the list of the blue row, choose a position\n"))
+        blue[position] = randomBlue
     elif randomRed == randomBlue:
         if redBlue == "r":
-            position = input("Choose a position in the red row from\n")
+            print(red)
+            position = int(input("This is the list of the red row, choose a position\n"))
+            red[position] = choice
         elif redBlue == "b":
-            position = input("Choose a position in the Blue row from\n")
+            print(blue)
+            position = int(input("This is the list of the blue row, choose a position\n"))
+            blue[position] = randomBlue
+
+
+    def checkingPosition(red,blue):
+        repeat = True
+        while repeat:
+            if red[position] != "":
+                print("Choose a different position")
+            elif blue[position] != "":
+                print("Choose a different position")
+
+
+    checkingPosition(red,blue)
