@@ -45,8 +45,8 @@ whiteDice = ["1", "1", "1", "2", "2", "3"]
 
 choicePosition = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
-red =  [negativeNumForRed, "", "", "", "", "", "", "", "", ""] 
-blue = ["", "", "", "", "", "", "", "", "", negativeNumForBlue]
+red =  [negativeNumForRed, "", "", 4, 5, "", "", 9, 10, ""] 
+blue = ["", 8, "", 6, "", 4, 3, 0, "", negativeNumForBlue]
 white = []
 
 
@@ -121,44 +121,128 @@ while repeat:
     # if len(white) == 5 or len(red) == 10 and len(blue) == 10:
     #     repeat = False
 
-    def checker(lijst,choice):
-        listOfNums = []
-        index = 0
-        
-        for x in lijst:
-            if lijst[index] != "":
-                index += 1
-            else:
-                leftValid = True
-                while leftValid:
-                    step = 1
-                    lijst[index - step]
-                    if lijst[index - step] != "":
-                        if lijst[index - step] < int(choice):
-                            step += 1
-                            listOfNums.append(index) 
-                            leftValid = False
-        rightValid = True
-        step = 1
-        index = 0
-        while rightValid:
-            for x in lijst:
-                if lijst[index] != "":
-                    index += 1
+    def checker(lijst,choice,pos):
 
-                else:
-                    if lijst[index] == "":
-                        index += 1 
-                    if lijst[index] != "":
-                        if int(choice) > lijst[index]:
-                            step += 1
-                            listOfNums.append(index)
-                            rightValid = False
-                    if index == 9:
-                        rightValid = False
-                        break 
+        if lijst[0] != -2:
+            lijst.reverse()
+            pos = len(lijst) - 1 - pos   
+
+
+        listOfNums = []
+        index = pos
+        index -= 1
+
+        leftValid = True
+        while leftValid:
+            if index == -1:
+                leftValid = False
+            elif lijst[index] == "":
+                listOfNums.append(index + 1)
+                index -= 1
+            elif lijst[index] != "":
+                if lijst[index] < int(choice): 
+                    index -= 1
+
+        index = 0
+        rightValid = True
+        if pos != 9:
+            index = pos
+
+        while rightValid:
+            if pos == 9:
+                rightValid == False 
+                break
+            if index == 10:
+                rightValid = False
+            elif lijst[index] == "":
+                listOfNums.append(index)
+                index += 1
+            elif lijst[index] != "":
+                if lijst[index] == int(choice):
+                    index += 1
+                elif lijst[index] > int(choice): 
+                    index += 1
+        if lijst == blue:
+            lijst.reverse()
+            for x in range(len(listOfNums)):
+                listOfNums[x] = len(lijst) - 1 - listOfNums[x]
         return listOfNums
-    print(checker(lijst,choice))                                           
+        
+        
+
+    print(checker(lijst,choice,position - 1))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def checker(lijst,choice):
+    #     listOfNums = []
+    #     index = 0
+    #     step = 1
+        
+    #     leftValid = True
+    #     while leftValid:
+    #         for x in lijst:
+    #             if index > 9:
+    #                 leftValid = False
+    #                 break
+    #             if lijst[index] != "":
+    #                 index += 1
+    #             else:
+    #                 if lijst[index] == "":
+    #                     index += 1
+    #                 if lijst[index - step] != "" or lijst[index - step] == "":
+    #                     index = 1
+    #                     if lijst[index - step] < int(choice):
+    #                         step += 1
+    #                         listOfNums.append(index) 
+    #                         leftValid = False
+    #                         if lijst[index] == "":
+    #                             step += 1
+                    
+            
+    #     rightValid = True
+    #     step = 1
+    #     index = 0
+    #     while rightValid:
+    #         for x in lijst:
+    #             if lijst[index] != "":
+    #                 index += 1
+
+    #             else:
+    #                 if lijst[index] == "":
+    #                     index += 1 
+    #                 if lijst[index] != "":
+    #                     if int(choice) > lijst[index]:
+    #                         step += 1
+    #                         listOfNums.append(index)
+    #                         rightValid = False
+    #                 if index == 9:
+    #                     rightValid = False
+    #                     break 
+    #     return listOfNums
+    # print(checker(lijst,choice))                                           
                     
 
 
