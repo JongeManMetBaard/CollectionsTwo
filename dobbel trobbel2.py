@@ -1,5 +1,6 @@
 import random 
 
+
 redBlue = ""
 
 countRed = 1
@@ -7,10 +8,11 @@ countBlue = 1
 countWhite = 0
 
 red =  [-2, 1, 2, 3, 4, "", 6, 7, 8, 9] 
-blue = [14, 12, 11, 7, 6, 5, 4, 3, -1, -2]
+blue = [14, 12, 11, 7, "", 6, 4, 3, 2, -2]
 white = [1,2,3,4,5]
 
 
+# Valid plek checker
 def checker(lijst,choice,pos):
     index = pos
     rightValid = True
@@ -59,9 +61,12 @@ def checker(lijst,choice,pos):
             index -= 1
 
 
+# rode lijst positie
 def redPos():   
     position = int(input(f"Choose a position in the red row\n "))
-    if int(choice) > red[index] or int(choice) < red[index]:
+# checker of de getallen kwijt kan
+    if outcome_a > red[index] or outcome_a < red[index] and outcome_b > red[index] or outcome_b < red[index] and outcome_c > red[index] or outcome_c < red[index] and outcome_d > red[index] or outcome_d < red[index]:
+        global repeat
         repeat = False
         endScore()
     else:
@@ -70,14 +75,31 @@ def redPos():
         red[position - 1] = choice
         countRed += 1
 
+# blauwe lijst positie
 def bluePos():
     position = int(input(f"Choose a position in the blue row\n"))
-    lijst = blue
-    checker(lijst,choice,position - 1)
-    blue[position - 1] = choice
-    global countBlue
-    countBlue += 1
+    index = position - 1
+# checker of de getallen kwijt kan
+    if blue[index] == "":
+        index -= 1
+    if outcome_a > blue[index] and outcome_b > blue[index] and outcome_c > blue[index] and outcome_d > blue[index]:
+        global repeat
+        repeat = False
+        endScore()
+    index += 2
 
+    if outcome_a < blue[index] and outcome_b < blue[index] and outcome_c < blue[index] and outcome_d < blue[index]:
+        endScore()
+        repeat = False
+    
+    else:
+        lijst = blue
+        checker(lijst,choice,position - 1)
+        blue[position - 1] = choice
+        global countBlue
+        countBlue += 1
+
+# eindscore
 def endScore():
     countRed = 10
     countBlue = 10
@@ -95,6 +117,7 @@ def endScore():
         print(f"Your final score: {finalScore}")
 
 
+# van lege plekken een 0 maken
 emptyPos = 0
 def lst(lijst):
     for i,x in enumerate (lijst):
@@ -103,6 +126,7 @@ def lst(lijst):
             global emptyPos
             emptyPos += 1
      
+# rode en blauwe lijst generator
 repeat = True
 while repeat:
 
@@ -110,10 +134,14 @@ while repeat:
     randomBlue = random.randint(1,6)
     randomWhite = random.randint(1,3)
 
-    outcome_a = randomRed + randomBlue + randomWhite
-    outcome_b = randomRed + randomBlue - randomWhite
-    outcome_c = randomRed + randomBlue
-    outcome_d = randomRed - randomWhite 
+    outcome_a = 8
+    # randomRed + randomBlue + randomWhite
+    outcome_b = 10
+    # randomRed + randomBlue - randomWhite
+    outcome_c = 13
+    # randomRed + randomBlue
+    outcome_d = 9
+    # randomRed - randomWhite 
 
     print("----------------------------------------------------------------------------")
     print("     Dobbel Trobbel")
@@ -153,12 +181,12 @@ while repeat:
         else:
             color = blue
 
-
     wrongChoice = True
     while wrongChoice:
         listOutcomes = [outcome_a, outcome_b, outcome_c,outcome_d]
         letters = ["a", "b", "c", "d"]
 
+        # keuze koppelen aan berekend uitkomst
         choice = input("Please choose which result to register (a, b, c, d)\n")
         letterChoice = choice
         for index in range(0,4): 
