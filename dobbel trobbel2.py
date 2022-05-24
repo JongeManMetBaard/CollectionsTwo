@@ -7,8 +7,8 @@ countRed = 1
 countBlue = 1
 countWhite = 0
 
-red =  [-2, 1, 2, 3, 4, "", 6, 7, 8, 9] 
-blue = [14, 12, 11, 7, "", 6, 4, 3, 2, -2]
+red =  [-2, "", "", "", "", "", "", "", "", ""] 
+blue = ["", "", "", "", "", "", "", "", "", -2]
 white = [1,2,3,4,5]
 
 
@@ -126,14 +126,10 @@ while repeat:
     randomBlue = random.randint(1,6)
     randomWhite = random.randint(1,3)
 
-    outcome_a = 8
-    # randomRed + randomBlue + randomWhite
-    outcome_b = 10
-    # randomRed + randomBlue - randomWhite
-    outcome_c = 13
-    # randomRed + randomBlue
-    outcome_d = 9
-    # randomRed - randomWhite 
+    outcome_a = randomRed + randomBlue + randomWhite
+    outcome_b = randomRed + randomBlue - randomWhite
+    outcome_c = randomRed + randomBlue
+    outcome_d = randomRed - randomWhite 
 
     print("----------------------------------------------------------------------------")
     print("     Dobbel Trobbel")
