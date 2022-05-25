@@ -8,7 +8,7 @@ countBlue = 1
 countWhite = 0
 
 red =  [-2, "", "", "", "", "", "", "", "", ""] 
-blue = ["", "", "", "", "", "", "", "", "", -2]
+blue = [8, "", "", "", "", "", "", "", "", -2]
 white = [1,2,3,4,5]
 
 
@@ -29,8 +29,6 @@ def checker(lijst,choice,pos):
             index += 1
         elif int(choice) < lijst[index] and lijst == red:
             index += 1
-        elif outcome_a < blue[index] and outcome_b < blue[index] and outcome_c < blue[index] and outcome_d < blue[index]:
-            endScore()
         elif int(choice) > lijst[index] and lijst == red:
             print("Choose a different position")
             redPos()
@@ -53,10 +51,6 @@ def checker(lijst,choice,pos):
             index -= 1
         elif int(choice) > lijst[index] and lijst == red:
             index -= 1
-        elif outcome_a > blue[index] and outcome_b > blue[index] and outcome_c > blue[index] and outcome_d > blue[index]:
-            endScore()
-            repeat = False
-            break
         elif int(choice) < lijst[index] and lijst == red:
             print("Choose a different position")
             redPos()
@@ -70,16 +64,11 @@ def checker(lijst,choice,pos):
 # rode lijst positie
 def redPos():   
     position = int(input(f"Choose a position in the red row\n "))
-# checker of de getallen kwijt kan
-    if outcome_a > red[index] or outcome_a < red[index] and outcome_b > red[index] or outcome_b < red[index] and outcome_c > red[index] or outcome_c < red[index] and outcome_d > red[index] or outcome_d < red[index]:
-        global repeat
-        repeat = False
-        endScore()
-    else:
-        lijst = red
-        checker(lijst,choice,position - 1)
-        red[position - 1] = choice
-        countRed += 1
+    lijst = red
+    checker(lijst,choice,position - 1)
+    red[position - 1] = choice
+    global countRed
+    countRed += 1
 
 # blauwe lijst positie
 def bluePos():
